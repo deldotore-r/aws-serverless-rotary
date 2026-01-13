@@ -1,0 +1,1182 @@
+/* 
+   ROTARY CLUB DA GUARDA - FOLHA DE ESTILOS CSS
+   ================================================
+   
+   Este arquivo contém todos os estilos para o site institucional do Rotary Club da Guarda.
+   Organizado seguindo as diretrizes do Rotary International para cores, tipografia e design.
+   
+   Estrutura:
+   1. Reset e variáveis CSS
+   2. Estilos base e tipografia
+   3. Layout e navegação
+   4. Componentes específicos
+   5. Responsividade
+   
+   Cores oficiais do Rotary utilizadas:
+   - Azul Rotary: #1e3a8a
+   - Azul secundário: #3b82f6
+   - Dourado Rotary: #d4af37
+   - Cores neutras: tons de cinza
+*/
+
+/* ===== 1. RESET CSS E VARIÁVEIS ===== */
+
+/* Reset básico para consistência entre navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variáveis CSS para cores e medidas - facilita manutenção */
+:root {
+    /* Cores oficiais do Rotary */
+    --rotary-blue: #1e3a8a;
+    --rotary-blue-light: #3b82f6;
+    --rotary-gold: #d4af37;
+    --rotary-gold-light: #fbbf24;
+
+    /* Cores de apoio */
+    --white: #ffffff;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+
+    /* Espaçamentos padronizados */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+
+    /* Tamanhos de fonte */
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+
+    /* Sombras */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+    /* Transições */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+}
+
+/* ===== 2. ESTILOS BASE E TIPOGRAFIA ===== */
+
+/* Configuração base do documento */
+html {
+    scroll-behavior: smooth;
+    /* Scroll suave entre secções */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--gray-800);
+    background-color: var(--white);
+}
+
+/* Estilos para títulos - hierarquia clara */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+    color: var(--rotary-blue);
+}
+
+h1 {
+    font-size: var(--text-4xl);
+}
+
+h2 {
+    font-size: var(--text-3xl);
+}
+
+h3 {
+    font-size: var(--text-2xl);
+}
+
+h4 {
+    font-size: var(--text-xl);
+}
+
+/* Estilos para parágrafos */
+p {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.7;
+}
+
+/* Estilos para links */
+a {
+    color: var(--rotary-blue-light);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+a:hover {
+    color: var(--rotary-blue);
+    text-decoration: underline;
+}
+
+/* Estilos para listas */
+ul,
+ol {
+    margin-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Container principal para centralizar conteúdo */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+}
+
+/* ===== 3. NAVEGAÇÃO E CABEÇALHO ===== */
+
+/* Cabeçalho fixo */
+.header {
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Container da navegação */
+.nav {
+    padding: var(--spacing-sm) 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+}
+
+/* Logo e nome do clube */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+}
+
+.club-name {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--rotary-blue);
+}
+
+figcaption {
+    text-align: center;
+}
+
+/* Menu de navegação */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    gap: var(--spacing-md);
+}
+
+.nav-item {
+    margin: 0;
+}
+
+.nav-link {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 4px;
+    transition: var(--text-sm);
+    font-weight: 500;
+    font-size: 1.125rem;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: var(--rotary-blue);
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* Menu mobile (hamburger) */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--rotary-blue);
+    margin: 3px 0;
+    transition: var(--transition-fast);
+}
+
+/* ===== 4. COMPONENTES PRINCIPAIS ===== */
+
+/* Espaçamento do topo para compensar o cabeçalho fixo */
+main {
+    margin-top: 80px;
+}
+
+/* Secção Hero/Principal */
+.hero {
+    background: linear-gradient(135deg, var(--rotary-blue) 0%, var(--rotary-blue-light) 100%);
+    color: var(--white);
+    padding: 3rem 0 2rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: var(--spacing-sm);
+    color: var(--white);
+}
+
+.hero-subtitle {
+    font-size: var(--text-xl);
+    color: var(--rotary-gold);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+}
+
+.hero-description {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.8;
+}
+
+/* Botões do hero */
+.hero-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Estilos para botões */
+.btn {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: var(--transition-normal);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--rotary-gold);
+    color: var(--gray-900);
+}
+
+.btn-primary:hover {
+    background-color: var(--rotary-gold-light);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.btn-secondary:hover {
+    background-color: var(--white);
+    color: var(--rotary-blue);
+    text-decoration: none;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--rotary-blue);
+    border-color: var(--rotary-blue);
+}
+
+.btn-outline:hover {
+    background-color: var(--rotary-blue);
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* Cards informativos */
+.info-cards {
+    padding: var(--spacing-2xl) 0;
+    background-color: var(--gray-50);
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.card {
+    background-color: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: var(--transition-normal);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.card h3 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--rotary-blue);
+}
+
+/* Secção de prévia "sobre" */
+.about-preview {
+    padding: var(--spacing-2xl) 0;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+}
+
+.about-text h2 {
+    margin-bottom: var(--spacing-md);
+}
+
+.about-text p {
+    margin-bottom: var(--spacing-md);
+}
+
+.responsive-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+}
+
+/* Container principal */
+.destaques-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+}
+
+/* Card padrão */
+.card-destaque {
+    background-color: var(--white);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.card-destaque:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Imagem do card */
+.card-destaque img {
+    width: 40%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Texto do card */
+.destaque-texto {
+    width: 60%;
+}
+
+.card-destaque h3 {
+    font-size: var(--text-2xl);
+    color: var(--rotary-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.card-destaque p {
+    font-size: var(--text-base);
+    color: var(--gray-800);
+    line-height: 1.7;
+}
+
+/* Card invertido (imagem à direita) */
+.card-destaque.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+
+    .card-destaque,
+    .card-destaque.reverse {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .card-destaque img,
+    .destaque-texto {
+        width: 100%;
+    }
+}
+
+/* ===== 5. PÁGINAS ESPECÍFICAS ===== */
+
+/* Cabeçalho das páginas internas */
+.page-header {
+    background: linear-gradient(135deg, var(--rotary-blue) 0%, var(--rotary-blue-light) 100%);
+    color: var(--white);
+    padding: var(--spacing-2xl) 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+}
+
+.page-header h1 {
+    color: var(--white);
+    margin-bottom: var(--spacing-sm);
+}
+
+.page-header p {
+    font-size: var(--text-lg);
+    color: var(--gray-100);
+}
+
+/* Secções de conteúdo */
+.content-section {
+    padding: var(--spacing-2xl) 0;
+}
+
+.content-block {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.content-with-image {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: start;
+    margin-top: var(--spacing-lg);
+}
+
+/* Áreas de foco do Rotary */
+.focus-areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.focus-item {
+    background-color: var(--gray-50);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    border-left: 4px solid var(--rotary-gold);
+}
+
+.focus-item h3 {
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--text-lg);
+}
+
+/* Valores do clube */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.value-item {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid var(--gray-200);
+    transition: var(--transition-normal);
+}
+
+.value-item:hover {
+    border-color: var(--rotary-gold);
+    transform: translateY(-2px);
+}
+
+/* Secção "Em Breve" */
+.coming-soon-section {
+    padding: var(--spacing-2xl) 0;
+    background-color: var(--gray-50);
+}
+
+.coming-soon-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.coming-soon-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.coming-soon-list {
+    text-align: left;
+    max-width: 600px;
+    margin: var(--spacing-lg) auto;
+    background-color: var(--white);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.coming-soon-note {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background-color: var(--rotary-blue-light);
+    color: var(--white);
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Informações de reunião */
+.regular-meetings {
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--rotary-gold);
+}
+
+.meeting-info p {
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--text-lg);
+}
+
+/* Página "Junte-se a Nós" */
+.join-content {
+    padding: var(--spacing-2xl) 0;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.benefit-item {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Requisitos de adesão */
+.membership-requirements {
+    background-color: var(--gray-50);
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    margin-top: var(--spacing-lg);
+}
+
+.requirements-list {
+    margin: var(--spacing-md) 0;
+}
+
+.membership-note {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background-color: var(--rotary-gold-light);
+    border-radius: 8px;
+    border-left: 4px solid var(--rotary-gold);
+}
+
+/* Passos para se juntar */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.step-item {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background-color: var(--rotary-blue);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin: 0 auto var(--spacing-md);
+}
+
+/* Expectativas */
+.expectations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.expectation-item {
+    padding: var(--spacing-lg);
+    background-color: var(--gray-50);
+    border-radius: 8px;
+    border-left: 4px solid var(--rotary-blue);
+}
+
+/* Call to Action */
+.cta-section {
+    background: linear-gradient(135deg, var(--rotary-blue) 0%, var(--rotary-blue-light) 100%);
+    color: var(--white);
+    padding: var(--spacing-2xl) 0;
+    margin-top: var(--spacing-2xl);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.cta-content h2 {
+    color: var(--white);
+    margin-bottom: var(--spacing-md);
+}
+
+.cta-content p {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Página de Contato */
+.contact-content {
+    padding: var(--spacing-2xl) 0;
+}
+
+.contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.contact-card {
+    background-color: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: var(--transition-normal);
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.contact-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.contact-link {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--rotary-blue);
+}
+
+.contact-description {
+    color: var(--gray-600);
+    font-size: var(--text-sm);
+    margin-top: var(--spacing-sm);
+}
+
+/* Formulário de contato */
+.contact-form-section {
+    background-color: var(--gray-50);
+    padding: var(--spacing-2xl);
+    border-radius: 12px;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: var(--spacing-lg) auto 0;
+}
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--gray-300);
+    border-radius: 8px;
+    font-size: var(--text-base);
+    transition: var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--rotary-blue-light);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-submit {
+    width: 100%;
+    font-size: var(--text-lg);
+}
+
+/* Informações adicionais */
+.additional-info {
+    margin-top: var(--spacing-2xl);
+}
+
+.info-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.info-block {
+    padding: var(--spacing-lg);
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.inline-link {
+    color: var(--rotary-blue-light);
+    font-weight: 600;
+}
+
+/* Placeholder para conteúdo */
+.content-placeholder {
+    background-color: var(--gray-50);
+    border: 2px dashed var(--gray-300);
+    border-radius: 12px;
+    padding: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+}
+
+.placeholder-content {
+    text-align: center;
+}
+
+/* ===== 6. RODAPÉ ===== */
+
+.footer {
+    background-color: var(--gray-900);
+    color: var(--gray-300);
+    padding: var(--spacing-2xl) 0 var(--spacing-lg);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.footer-section h3 {
+    color: var(--white);
+    margin-bottom: var(--spacing-md);
+}
+
+.footer-links {
+    list-style: none;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.footer-links a {
+    color: var(--gray-300);
+    transition: var(--transition-fast);
+}
+
+.footer-links a:hover {
+    color: var(--rotary-gold);
+}
+
+.footer-contact p {
+    margin-bottom: var(--spacing-xs);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--gray-700);
+    padding-top: var(--spacing-lg);
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--text-sm);
+    color: var(--gray-400);
+}
+
+.img-centralizada {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    object-fit: contain;
+}
+
+.figura-centralizada {
+    text-align: center;
+}
+
+/* ===== 7. RESPONSIVIDADE ===== */
+
+/* Tablets */
+@media (max-width: 768px) {
+
+    /* Tornar o container da navegação um contexto de posicionamento */
+    .nav-container {
+        position: relative;
+    }
+
+    /* Mostrar o menu mobile (hambúrguer), posicionado no canto direito */
+    .nav-toggle {
+        display: flex;
+        position: absolute;
+        right: var(--spacing-sm);
+        /* ou: right: 1rem; */
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1100;
+        /* Garante que fique acima de outros elementos */
+    }
+
+    .logo {
+        height: 32px;
+    }
+
+    /* Esconder menu desktop no mobile */
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: var(--white);
+        width: 100%;
+        text-align: center;
+        transition: var(--transition-normal);
+        box-shadow: var(--shadow-lg);
+        padding: var(--spacing-lg) 0;
+        gap: 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: var(--spacing-sm) 0;
+    }
+
+    /* Ajustar hero para mobile */
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* Ajustar about-content para mobile */
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .content-with-image {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+
+
+    /* Ajustar grids para mobile (1 coluna) */
+    .cards-grid,
+    .focus-areas,
+    .values-grid,
+    .benefits-grid,
+    .steps-grid,
+    .expectations,
+    .contact-info-grid,
+    .info-blocks {
+        grid-template-columns: 1fr;
+    }
+
+    /* Ajustar espaçamentos para mobile */
+    :root {
+        --spacing-2xl: 3rem;
+        --spacing-xl: 2rem;
+    }
+
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+
+    .img-centralizada {
+        max-width: 150px;
+    }
+}
+
+
+/* Smartphones */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .club-name {
+        font-size: var(--text-base);
+    }
+
+    .logo {
+        height: 52px;
+    }
+
+    .card,
+    .contact-card,
+    .benefit-item {
+        padding: var(--spacing-md);
+    }
+
+    /* Ajustar formulário para mobile */
+    .contact-form-section {
+        padding: var(--spacing-lg);
+    }
+
+    .img-centralizada {
+        max-width: 120px;
+    }
+}
+
+
+/* Estados de animação do menu mobile */
+.nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* Utilitários */
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-1 {
+    margin-bottom: var(--spacing-xs);
+}
+
+.mb-2 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.mb-3 {
+    margin-bottom: var(--spacing-md);
+}
+
+
+/* Acessibilidade - melhor contraste para links de foco */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--rotary-gold);
+    outline-offset: 2px;
+}
+
+
+/* Garantir que imagens sejam responsivas */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Container para imagens em ziguezague dentro dos cards-destaques */
+.card-destaque .imagens-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* Imagens empilhadas, largura total do container */
+.card-destaque .imagens-container img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+}
+
+/* Deslocamento e sobreposição estilo ziguezague */
+.card-destaque .imagens-container img:nth-child(odd) {
+    margin-left: 15%;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-destaque .imagens-container img:nth-child(even) {
+    margin-right: 15%;
+    margin-top: -40px;
+    /* sobreposição sutil no canto superior da imagem anterior */
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste responsivo para telas pequenas */
+@media (max-width: 768px) {
+
+    .card-destaque .imagens-container img:nth-child(odd),
+    .card-destaque .imagens-container img:nth-child(even) {
+        margin: 0;
+        margin-top: var(--spacing-sm);
+        z-index: auto;
+    }
+}

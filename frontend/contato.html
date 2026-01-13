@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Rotary Club da Guarda</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="https://www.rotary.org/sites/default/files/favicon_0.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.42.0/dist/umd/supabase.min.js"></script>
+
+    
+</head>
+
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="imagens/logo_sem_fundo.png" alt="Rotary Logo" class="logo">
+                    
+                </div>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="sobre-nos.html" class="nav-link">Sobre Nós</a></li>
+                <li class="nav-item"><a href="projetos.html" class="nav-link">Destaques</a></li>
+                <!--<li class="nav-item"><a href="eventos.html" class="nav-link">Eventos</a></li>
+                                <li class="nav-item"><a href="noticias.html" class="nav-link">Notícias</a></li>-->
+                <li class="nav-item"><a href="junte-se.html" class="nav-link">Junte-se a Nós</a></li>
+                <!--<li class="nav-item"><a href="https://www.rotary.org/pt" target="_blank" class="nav-link">Rotary
+                                                        Internacional</a></li>-->
+                <li class="nav-item"><a href="distrito1970.html" class="nav-link active">Distrito 1970</a></li>
+                <li class="nav-item"><a href="contato.html" class="nav-link">Contactos</a></li>
+            </ul>
+
+                <div class="nav-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Contactos</h1>
+                <p>Entre em contacto connosco - estamos aqui para ajudar</p>
+            </div>
+        </section>
+
+        <section class="contact-content">
+            <div class="container">
+
+                <!-- Informações de contato -->
+                <div class="contact-info-grid">
+
+                    <div class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <h3>Email</h3>
+                        <p>
+                            <a href="mailto:contacto@rotaryclubguarda.org" class="contact-link">
+                                contacto@rotaryclubguarda.org
+                            </a>
+                        </p>
+                        <p class="contact-description">
+                            Para todas as questões, informações sobre o clube ou interesse em tornar-se membro.
+                        </p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <h3>Facebook</h3>
+                        <p>
+                            <a href="https://www.facebook.com/groups/rotaryclubguarda" class="contact-link">
+                                Acompanhe-nos no Facebook
+                            </a>
+                        </p>
+                        <p class="contact-description">
+                            Para todas as questões, informações sobre o clube ou interesse em tornar-se membro.
+                        </p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <h3>Instagram</h3>
+                        <p>
+                            <a href="https://www.instagram.com/rotaryclubdaguarda/" class="contact-link" target="_blank">
+                                Siga-nos no Instagram
+                            </a>
+                        </p>
+                        <p class="contact-description">
+                            Acompanhe imagens, eventos e bastidores do nosso clube na rede social mais visual.
+                        </p>
+                    </div>
+
+                    <!--<div class="contact-card">
+                        <div class="contact-icon">📍</div>
+                        <h3>Local das Reuniões</h3>
+                        <p><strong>Hotel Lusitânia</strong></p>
+                        <p>Guarda, Portugal</p>
+                        <p class="contact-description">
+                            As nossas reuniões realizam-se todas as terças-feiras às 21h00.
+                            Visitantes são sempre bem-vindos!
+                        </p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">🕘</div>
+                        <h3>Horário das Reuniões</h3>
+                        <p><strong>Terças-feiras</strong></p>
+                        <p>21h00</p>
+                        <p class="contact-description">
+                            Reuniões semanais onde discutimos projetos, planeamos atividades
+                            e fortalecemos os laços de amizade rotária.
+                        </p>
+                    </div>-->
+
+                    
+
+                </div>
+
+                <!-- Formulário de contato -->
+                <div class="contact-form-section">
+                    <h2>Envie-nos uma Mensagem</h2>
+                    <p>
+                        Use o formulário abaixo para nos contactar. Responderemos o mais brevemente possível.
+                    </p>
+
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nome Completo *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Telefone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Assunto *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Seleccione um assunto</option>
+                                <option value="membership">Interesse em tornar-me membro</option>
+                                <option value="projects">Informações sobre projetos</option>
+                                <option value="events">Eventos e reuniões</option>
+                                <option value="partnership">Parcerias</option>
+                                <option value="general">Informações gerais</option>
+                                <option value="other">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Mensagem *</label>
+                            <textarea id="message" name="message" rows="6" required
+                                placeholder="Escreva aqui a sua mensagem..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary form-submit">
+                            Enviar Mensagem
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Informação adicional -->
+                <div class="additional-info">
+                    <h2>Outras Informações Úteis</h2>
+
+                    <div class="info-blocks">
+                        <div class="info-block">
+                            <h3>Primeira Visita</h3>
+                            <p>
+                                Se está a pensar visitar-nos pela primeira vez, recomendamos que nos contacte
+                                previamente por email. Assim poderemos recebê-lo da melhor forma e responder
+                                a todas as suas questões.
+                            </p>
+                        </div>
+
+                        <div class="info-block">
+                            <h3>Parcerias e Colaborações</h3>
+                            <p>
+                                Estamos sempre abertos a parcerias com outras organizações para projetos
+                                de serviço comunitário. Se representa uma instituição e quer colaborar connosco,
+                                contacte-nos!
+                            </p>
+                        </div>
+
+                        <div class="info-block">
+                            <h3>Informações sobre o Rotary</h3>
+                            <p>
+                                Para mais informações sobre o Rotary Internacional, visite o
+                                <a href="https://www.rotary.org/pt" target="_blank" class="inline-link">
+                                    site oficial do Rotary
+                                </a>
+                                onde encontrará recursos e informações detalhadas sobre a organização.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Rotary Club da Guarda</h3>
+    
+                    <div class="footer-contact">
+                        <p>📧 contacto@rotaryclubguarda.org</p>
+                    </div>
+                </div>
+    
+    
+    
+                <div class="footer-section">
+                    <h3>Reuniões</h3>
+                    <ul class="footer-links">
+                        <li>Terças-feiras às 21h00</li>
+                        <li>Hotel Lusitânia, Guarda</li>
+                    </ul>
+                </div>
+    
+                <div class="footer-section">
+                    <h3>Links Úteis</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://www.rotary.org/pt" target="_blank">Rotary Internacional</a></li>
+                        <li><a href="sobre-nos.html">Sobre Nós</a></li>
+                        <li><a href="contato.html">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+    
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rotary Club da Guarda. Todos os direitos reservados.</p>
+                <p>Site desenvolvido seguindo as diretrizes do Rotary International</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // 1. Pegamos a URL que o Terraform vai gerar amanhã após o 'apply'
+            // Você deve substituir este valor pelo output 'api_gateway_url'
+            const AWS_API_URL = 'COLE_AQUI_A_URL_DO_TERRAFORM_OUTPOST';
+
+            // 2. Coletamos os dados do formulário
+            const formData = {
+                nome: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                telefone: document.getElementById('phone').value,
+                assunto: document.getElementById('subject').value,
+                mensagem: document.getElementById('message').value
+            };
+
+            const button = e.target.querySelector('button');
+            button.disabled = true;
+            button.innerText = 'Enviando...';
+
+            try {
+                // 3. Enviamos para a sua infraestrutura Serverless na AWS
+                const response = await fetch(AWS_API_URL, {
+                    method: 'POST',
+                    mode: 'cors', // Crucial para funcionar entre S3 e API Gateway
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('Mensagem enviada com sucesso para o Rotary Club da Guarda!');
+                    document.getElementById('contact-form').reset();
+                } else {
+                    throw new Error('Falha no servidor');
+                }
+            } catch (error) {
+                alert('Erro ao enviar: Não foi possível conectar ao servidor AWS.');
+                console.error('Erro detalhado:', error);
+            } finally {
+                button.disabled = false;
+                button.innerText = 'Enviar Mensagem';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
