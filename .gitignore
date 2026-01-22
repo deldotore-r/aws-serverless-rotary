@@ -1,0 +1,45 @@
+# ------------------------------
+# Arquivos temporários e de sistema
+# ------------------------------
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+
+# ------------------------------
+# Python / Lambda
+# ------------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+lambda_function_payload.zip
+
+# ------------------------------
+# Terraform
+# ------------------------------
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+
+# ------------------------------
+# Editor / VSCode
+# ------------------------------
+.vscode/
+*.code-workspace
+
+# ------------------------------
+# Arquivos sensíveis / secrets
+# ------------------------------
+frontend/contato.html   # opcional, se não quiser versionar dados do formulário
+.env
+
+# ------------------------------
+# Arquivos de documentaç~ao pessoal
+# ------------------------------
+checklist.txt

@@ -1,28 +1,51 @@
+###############################################################################
+# S3 Website Configuration
+#
+# Define o bucket S3 que hospeda o frontend do Rotary Club da Guarda
+# para acesso público via browser.
+# Boas práticas:
+# - Permissões públicas configuradas de forma explícita
+# - Configuração de website estático (index.html)
+# - Tags consistentes com outros recursos
+###############################################################################
 
-# 1. Definição do Bucket S3 que armazenará os arquivos do site (HTML, CSS, JS).
+##############################
+# 1. Bucket S3
+##############################
 
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "rotary-club-guarda-site" # O nome deve ser único em toda a AWS
+  bucket = "rotary-club-guarda-site" # Deve ser único globalmente na AWS
 
+  # Tags unificadas para rastreabilidade
   tags = {
+    Project     = "Rotary Serverless"
+    Environment = "prod"
     Name        = "Bucket do Website Estático"
     Description = "Hospeda o frontend do Rotary Club da Guarda"
   }
 }
 
-# 2. Configuração do Bucket para modo "Website".
-# Isto diz à AWS que o bucket deve procurar um arquivo 'index.html' ao ser acessado.
+##############################
+# 2. Configuração do Bucket como Website Estático
+##############################
 
 resource "aws_s3_bucket_website_configuration" "config" {
   bucket = aws_s3_bucket.website_bucket.id
 
   index_document {
-    suffix = "index.html"
+    suffix = "index.html" # Arquivo principal ao acessar o bucket via browser
   }
+
+  # Opcional: adicionar erro customizado
+  # error_document {
+  #   key = "404.html"
+  # }
 }
 
-# 3. Gestão de Bloqueio de Acesso Público.
-# Por padrão, a AWS bloqueia tudo. Para um site, precisamos permitir a leitura pública.
+##############################
+# 3. Desbloqueio do Acesso Público
+# Necessário para que qualquer usuário consiga acessar os arquivos
+##############################
 
 resource "aws_s3_bucket_public_access_block" "public_access" {
   bucket = aws_s3_bucket.website_bucket.id
@@ -33,13 +56,12 @@ resource "aws_s3_bucket_public_access_block" "public_access" {
   restrict_public_buckets = false
 }
 
-# 4. Política do Bucket (Bucket Policy).
-# Esta é a "permissão de leitura" que permite que qualquer pessoa na internet veja o site.
+##############################
+# 4. Política do Bucket: Permissão de Leitura Pública
+##############################
 
 resource "aws_s3_bucket_policy" "allow_public_access" {
   bucket = aws_s3_bucket.website_bucket.id
-  
-  # Garante que esta política só seja aplicada após o desbloqueio do acesso público acima.
 
   depends_on = [aws_s3_bucket_public_access_block.public_access]
 
@@ -49,11 +71,10 @@ resource "aws_s3_bucket_policy" "allow_public_access" {
       {
         Sid       = "PublicReadGetObject"
         Effect    = "Allow"
-        Principal = "*"
-        Action    = "s3:GetObject"
+        Principal = "*"                # Todos os usuários
+        Action    = "s3:GetObject"    # Apenas leitura de objetos
         Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
-      },
+      }
     ]
   })
 }
-
