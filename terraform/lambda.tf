@@ -118,4 +118,7 @@ resource "aws_sns_topic_subscription" "email_target" {
   topic_arn = aws_sns_topic.form_notifications.arn
   protocol  = "email"
   endpoint  = var.notification_email
+  lifecycle {
+    create_before_destroy = true
+  }
 }
