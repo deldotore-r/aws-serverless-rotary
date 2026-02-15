@@ -4,19 +4,23 @@ import uuid
 import os
 from datetime import datetime
 
-# Inicialização
+# Inicialização de recursos
 dynamodb = boto3.resource("dynamodb")
+sns = boto3.client("sns")
+
+# Variáveis de ambiente (devem ser configuradas no Terraform)
 TABLE_NAME = os.environ.get("TABLE_NAME", "rotary-form-messages")
+SNS_TOPIC_ARN = os.environ.get("SNS_TOPIC_ARN")
 table = dynamodb.Table(TABLE_NAME)
+
 REQUIRED_FIELDS = ["nome", "email", "mensagem"]
 
 def lambda_handler(event, context):
     """
-    Processa o formulário com suporte robusto a CORS e Payload 1.0/2.0.
+    Processa o formulário, salva no DynamoDB e notifica via SNS.
     """
     
     # 1. Identificar o método HTTP de forma segura para Payload 1.0 e 2.0
-    # Na v1.0 é event['httpMethod'], na v2.0 é event['requestContext']['http']['method']
     method = event.get('httpMethod') or event.get('requestContext', {}).get('http', {}).get('method')
     
     # CORS Headers padrão
@@ -41,13 +45,14 @@ def lambda_handler(event, context):
 
         body = json.loads(event["body"])
 
-        # 3. Validação
+        # 3. Validação simplificada
         for field in REQUIRED_FIELDS:
+            # Verifica o campo em português ou inglês
             field_alt = field.replace("nome", "name").replace("mensagem", "message")
             if not body.get(field) and not body.get(field_alt):
                 return _response(400, f"Campo obrigatório ausente: {field}", headers)
 
-        # 4. Dados para o DynamoDB
+        # 4. Preparação dos dados
         item = {
             "id": str(uuid.uuid4()),
             "nome": body.get("nome") or body.get("name") or "Não informado",
@@ -58,7 +63,35 @@ def lambda_handler(event, context):
             "data_envio": datetime.utcnow().isoformat() + "Z",
         }
 
+        # 5. Salvar no DynamoDB
         table.put_item(Item=item)
+
+        # 6. Notificação via SNS (E-mail para o stakeholder)
+        if SNS_TOPIC_ARN:
+            try:
+                subject = f"Novo Contacto: {item['nome']} - {item['assunto']}"
+                message = (
+                    f"Recebeu uma nova mensagem pelo site do Rotary Club da Guarda!\n\n"
+                    f"--------------------------------------------------\n"
+                    f"Nome: {item['nome']}\n"
+                    f"E-mail: {item['email']}\n"
+                    f"Telefone: {item['telefone']}\n"
+                    f"Assunto: {item['assunto']}\n"
+                    f"Data: {item['data_envio']}\n"
+                    f"--------------------------------------------------\n"
+                    f"Mensagem:\n{item['mensagem']}\n"
+                    f"--------------------------------------------------\n\n"
+                    f"Esta mensagem foi salva no DynamoDB: {TABLE_NAME}"
+                )
+                
+                sns.publish(
+                    TopicArn=SNS_TOPIC_ARN,
+                    Subject=subject,
+                    Message=message
+                )
+            except Exception as sns_err:
+                # Logamos o erro do SNS mas não travamos a resposta ao usuário
+                print(f"Erro ao enviar SNS: {str(sns_err)}")
 
         return _response(200, "Obrigado! O Rotary Club da Guarda recebeu a sua mensagem.", headers)
 

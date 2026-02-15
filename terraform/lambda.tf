@@ -3,22 +3,15 @@
 #
 # Este arquivo define a função Lambda responsável por processar os formulários
 # do site do Rotary, bem como o papel (IAM Role) e as permissões necessárias.
-#
-# Boas práticas aplicadas:
-# - Princípio do menor privilégio
-# - Uso de environment variables
-# - Deploy automático via Terraform ao detectar mudanças no código
-# - Tags para rastreabilidade
 ###############################################################################
 
 ##############################
 # 1. Preparar o código da Lambda
-# Compacta o diretório do código em um arquivo .zip para upload automático
 ##############################
 
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_dir  = "${path.module}/lambda/contact_form_handler"      # Caminho da função Lambda
+  source_dir  = "${path.module}/lambda/contact_form_handler"
   output_path = "${path.module}/lambda/contact_form_handler_payload.zip"
 }
 
@@ -29,7 +22,6 @@ data "archive_file" "lambda_zip" {
 resource "aws_iam_role" "lambda_exec" {
   name = "rotary_lambda_exec_role"
 
-  # Política que permite ao serviço Lambda assumir este papel
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -41,7 +33,6 @@ resource "aws_iam_role" "lambda_exec" {
     }]
   })
 
-  # Tags para identificação no console AWS
   tags = {
     Project     = "Rotary Serverless"
     Environment = "dev"
@@ -49,24 +40,24 @@ resource "aws_iam_role" "lambda_exec" {
 }
 
 ##############################
-# 3. IAM Role Policy: Permissões específicas da Lambda
+# 3. IAM Role Policy: Permissões para DynamoDB, CloudWatch e SNS
 ##############################
 
-resource "aws_iam_role_policy" "lambda_dynamo_policy" {
-  name = "rotary_lambda_dynamo_policy"
+resource "aws_iam_role_policy" "lambda_combined_policy" {
+  name = "rotary_lambda_policy"
   role = aws_iam_role.lambda_exec.id
 
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        # Permite que a Lambda escreva itens na tabela DynamoDB
+        # Permissão para o DynamoDB
         Action   = ["dynamodb:PutItem"],
         Effect   = "Allow",
         Resource = aws_dynamodb_table.form_messages.arn
       },
       {
-        # Permite criar logs no CloudWatch (necessário para manutenção e debugging)
+        # Permissão para Logs
         Action   = [
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
@@ -74,6 +65,12 @@ resource "aws_iam_role_policy" "lambda_dynamo_policy" {
         ],
         Effect   = "Allow",
         Resource = "arn:aws:logs:*:*:*"
+      },
+      {
+        # Permissão para Notificações SNS
+        Action   = "sns:Publish",
+        Effect   = "Allow",
+        Resource = aws_sns_topic.form_notifications.arn
       }
     ]
   })
@@ -91,21 +88,34 @@ resource "aws_lambda_function" "form_processor" {
   handler          = "index.lambda_handler"
   runtime          = "python3.9"
 
-  # Configurações de ambiente
+  # Configurações de ambiente - Essencial para o código Python funcionar
   environment {
     variables = {
-      TABLE_NAME = aws_dynamodb_table.form_messages.name
+      TABLE_NAME    = aws_dynamodb_table.form_messages.name
+      SNS_TOPIC_ARN = aws_sns_topic.form_notifications.arn
     }
   }
 
-  # Controle de recursos da Lambda
-  timeout      = 10    # segundos, ajuste se necessário
-  memory_size  = 128   # MB, ajuste se necessário
+  timeout     = 10
+  memory_size = 128
 
-  # Tags para rastreabilidade e billing
   tags = {
     Project     = "Rotary Serverless"
     Environment = "dev"
-    Description = "Processador de formulário do site do Rotary"
+    Description = "Processador de formulário com notificações SNS"
   }
+}
+
+##############################
+# 5. Configuração de Notificações (SNS)
+##############################
+
+resource "aws_sns_topic" "form_notifications" {
+  name = "rotary-form-notifications"
+}
+
+resource "aws_sns_topic_subscription" "email_target" {
+  topic_arn = aws_sns_topic.form_notifications.arn
+  protocol  = "email"
+  endpoint  = "deldotore@gmail.com" 
 }
