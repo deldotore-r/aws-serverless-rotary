@@ -22,5 +22,6 @@ A solução utiliza uma abordagem moderna e de baixo custo:
 3. Preencha o `terraform.tfvars` com os seus dados.
 4. Execute `terraform init` e `terraform apply`.
 
-## 🛠️ Manutenção Operacional
-Consulte o ficheiro [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md) para o passo a passo de manutenção.
+## 🛠️ Documentação Complementar
+- [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md): Manual de voo para deploys e manutenção.
+- [COSTS.md](./COSTS.md): Detalhamento de custos estimados na AWS.
