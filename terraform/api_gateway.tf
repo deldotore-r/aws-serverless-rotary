@@ -3,6 +3,7 @@
 #
 # Define a API HTTP que expõe a função Lambda para o formulário de contato.
 # Boas práticas aplicadas:
+
 # - HTTP API (mais barata que REST API clássico)
 # - CORS configurado via variável
 # - Apenas métodos necessários habilitados (POST)
@@ -57,9 +58,9 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
   api_id           = aws_apigatewayv2_api.form_api.id
   integration_type = "AWS_PROXY"
   integration_uri  = aws_lambda_function.form_processor.invoke_arn
-  
+
   # Força o formato 1.0 para garantir que os headers da Lambda sejam lidos corretamente
-  payload_format_version = "1.0" 
+  payload_format_version = "1.0"
 }
 
 ##############################
@@ -78,7 +79,7 @@ resource "aws_apigatewayv2_route" "options_route" {
   api_id    = aws_apigatewayv2_api.form_api.id
   route_key = "OPTIONS /contato"
   target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
-} 
+}
 
 ##############################
 # 5. Permissão Lambda

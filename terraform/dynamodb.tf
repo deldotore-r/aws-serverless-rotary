@@ -6,13 +6,13 @@
 
 resource "aws_dynamodb_table" "form_messages" {
   name         = "rotary-form-messages"
-  billing_mode = "PAY_PER_REQUEST"   # Paga apenas quando há uso
-  hash_key     = "id"                 # Chave primária única para cada mensagem
+  billing_mode = "PAY_PER_REQUEST" # Paga apenas quando há uso
+  hash_key     = "id"              # Chave primária única para cada mensagem
 
   # Definição do atributo da chave primária
   attribute {
     name = "id"
-    type = "S"  # 'S' = String
+    type = "S" # 'S' = String
   }
 
   # Tags para rastreabilidade de custos e identificação do recurso

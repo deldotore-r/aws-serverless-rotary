@@ -58,7 +58,7 @@ resource "aws_iam_role_policy" "lambda_combined_policy" {
       },
       {
         # Permissão para Logs
-        Action   = [
+        Action = [
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
           "logs:PutLogEvents"
@@ -117,5 +117,5 @@ resource "aws_sns_topic" "form_notifications" {
 resource "aws_sns_topic_subscription" "email_target" {
   topic_arn = aws_sns_topic.form_notifications.arn
   protocol  = "email"
-  endpoint  = "deldotore@gmail.com" 
+  endpoint  = var.notification_email
 }

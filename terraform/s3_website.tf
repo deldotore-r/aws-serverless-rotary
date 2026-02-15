@@ -71,8 +71,8 @@ resource "aws_s3_bucket_policy" "allow_public_access" {
       {
         Sid       = "PublicReadGetObject"
         Effect    = "Allow"
-        Principal = "*"                # Todos os usuários
-        Action    = "s3:GetObject"    # Apenas leitura de objetos
+        Principal = "*"            # Todos os usuários
+        Action    = "s3:GetObject" # Apenas leitura de objetos
         Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
       }
     ]

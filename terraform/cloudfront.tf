@@ -1,4 +1,5 @@
 # Cria a distribuição do CloudFront (CDN)
+
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name = aws_s3_bucket_website_configuration.config.website_endpoint

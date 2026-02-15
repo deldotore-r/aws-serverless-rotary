@@ -55,3 +55,11 @@ checklist.txt
 .env
 .aws/
 credentials.ini
+
+
+crash.log
+
+# Sistema e Editores
+.DS_Store
+.vscode/
+checklist.txt

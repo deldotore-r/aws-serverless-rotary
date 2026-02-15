@@ -16,7 +16,6 @@ variable "aws_region" {
 variable "project_name" {
   description = "Nome base do projeto para tagging e nomes de recursos"
   type        = string
-  default     = "rotary-club-guarda"
 }
 
 # Ambiente: dev, staging ou prod
@@ -37,21 +36,23 @@ variable "cors_origins" {
 variable "dynamodb_table_name" {
   description = "Nome da tabela DynamoDB que armazenará mensagens do formulário"
   type        = string
-  default     = "rotary-form-messages"
 }
 
 # Nome do bucket S3 do site
 variable "s3_bucket_name" {
   description = "Nome do bucket S3 que hospedará o frontend do site"
   type        = string
-  default     = "rotary-club-guarda-site"
 }
 
 # Nome da função Lambda
 variable "lambda_function_name" {
   description = "Nome da função Lambda que processa o formulário"
   type        = string
-  default     = "rotary-form-processor"
 }
 
+variable "notification_email" {
+  description = "E-mail que receberá as notificações do formulário"
+  type        = string
+  sensitive   = true # Isso evita que o e-mail apareça em texto claro nos logs do terminal
+}
 

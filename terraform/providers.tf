@@ -9,12 +9,12 @@
 ###############################################################################
 
 terraform {
-  required_version = ">= 1.5.0"  # Garante compatibilidade mínima do Terraform
+  required_version = ">= 1.5.0" # Garante compatibilidade mínima do Terraform
 
   required_providers {
     aws = {
-      source  = "hashicorp/aws"  # Provider oficial da HashiCorp para AWS
-      version = "~> 5.0"         # Mantém compatibilidade com versões 5.x
+      source  = "hashicorp/aws" # Provider oficial da HashiCorp para AWS
+      version = "~> 5.0"        # Mantém compatibilidade com versões 5.x
     }
   }
 }

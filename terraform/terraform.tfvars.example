@@ -1,0 +1,12 @@
+# ------------------------------------------------------------------------------
+# TERRAFORM VARIABLES EXAMPLE
+# ------------------------------------------------------------------------------
+# Instruções: Copie este ficheiro para 'terraform.tfvars' e preencha os valores.
+# O ficheiro 'terraform.tfvars' original é ignorado pelo Git por segurança.
+
+project_name         = "rotary-club-exemplo"
+s3_bucket_name       = "meu-site-rotary-unique-name"
+dynamodb_table_name  = "mensagens-contato"
+lambda_function_name = "processador-contato"
+notification_email   = "seu-email@exemplo.com"
+cors_origins         = ["https://exemplo.org", "https://www.exemplo.org"]
