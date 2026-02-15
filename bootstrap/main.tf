@@ -1,28 +1,19 @@
 provider "aws" {
-  region = "us-east-1"
+  region  = "us-east-1"
+  profile = "rotary"
 }
 
-# 1. Bucket S3 para armazenar o arquivo terraform.tfstate
+# 1. Recurso principal do Bucket (agora mais limpo)
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "rotary-guarda-terraform-state" # Deve ser único globalmente
+  bucket = "rotary-guarda-terraform-state"
 
-  # Impede destruição acidental do bucket
+  # Ativa o suporte para Object Lock no nível do bucket
+  object_lock_enabled = true
+
   lifecycle {
     prevent_destroy = true
   }
 
-  # 2. Habilita o Object Lock para que S3 Native Locking funcione
-  object_lock_configuration {
-    object_lock_enabled = "Enabled"
-    rule {
-      default_retention {
-        mode  = "GOVERNANCE" # Modo mais flexível, pode ser sobrescrito por admins
-        days  = 30            # Retenção mínima para evitar sobrescritas acidentais
-      }
-    }
-  }
-
-  # 3. Tags para identificação e gestão de custos
   tags = {
     Name        = "Terraform State Bucket"
     Environment = "Bootstrap"
@@ -31,7 +22,7 @@ resource "aws_s3_bucket" "terraform_state" {
   }
 }
 
-# 4. Habilita versionamento para podermos recuperar estados anteriores
+# 2. Habilita versionamento (recurso separado)
 resource "aws_s3_bucket_versioning" "enabled" {
   bucket = aws_s3_bucket.terraform_state.id
   versioning_configuration {
@@ -39,7 +30,7 @@ resource "aws_s3_bucket_versioning" "enabled" {
   }
 }
 
-# 5. Criptografia nativa para proteger dados sensíveis do estado
+# 3. Criptografia (recurso separado)
 resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
   bucket = aws_s3_bucket.terraform_state.id
 
@@ -50,3 +41,14 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
   }
 }
 
+# 4. CONFIGURAÇÃO MODERNA DO OBJECT LOCK (O ajuste que você pediu)
+resource "aws_s3_bucket_object_lock_configuration" "state_lock" {
+  bucket = aws_s3_bucket.terraform_state.id
+
+  rule {
+    default_retention {
+      mode = "GOVERNANCE"
+      days = 30
+    }
+  }
+}

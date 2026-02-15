@@ -1,45 +1,57 @@
-# ------------------------------
-# Arquivos temporários e de sistema
-# ------------------------------
-*.swp
-*.swo
-*.bak
-*.tmp
-*.log
-.DS_Store
-Thumbs.db
+# ==============================================================================
+# GITIGNORE - ROTARY CLUB DA GUARDA (AWS SERVERLESS)
+# ==============================================================================
 
-# ------------------------------
-# Python / Lambda
-# ------------------------------
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-lambda_function_payload.zip
+# --- Terraform ---
+# Ignora a pasta de trabalho do Terraform (binários dos providers)
+.terraform/
 
-# ------------------------------
-# Terraform
-# ------------------------------
+# Ignora os ficheiros de estado (contêm dados sensíveis e IDs da infraestrutura)
 *.tfstate
 *.tfstate.*
-.terraform/
-.terraform.lock.hcl
-crash.log
 
-# ------------------------------
-# Editor / VSCode
-# ------------------------------
+# Ignora o ficheiro de lock do Terraform (opcional, mas recomendado ignorar em 
+# projetos individuais para evitar conflitos de hash)
+.terraform.lock.hcl
+
+# Ignora ficheiros de variáveis que possam conter secrets
+*.tfvars
+*.tfvars.json
+
+# --- Python / Lambda ---
+# Ignora pastas de cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignora os pacotes ZIP gerados automaticamente para o deploy das Lambdas
+# Isso evita que o repositório fique pesado com binários repetitivos
+terraform/lambda/*.zip
+terraform/lambda/contact_form_handler_payload.zip
+
+# --- Sistema e Editores ---
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# VS Code
 .vscode/
 *.code-workspace
 
-# ------------------------------
-# Arquivos sensíveis / secrets
-# ------------------------------
-frontend/contato.html   # opcional, se não quiser versionar dados do formulário
-.env
+# Logs de erro e temporários
+*.log
+crash.log
+tmp/
 
-# ------------------------------
-# Arquivos de documentaç~ao pessoal
-# ------------------------------
+# --- Documentação Pessoal ---
+# Arquivos de notas que não fazem parte do código do projeto
 checklist.txt
+
+# --- Ambiente e Secrets ---
+# Nunca versionar ficheiros de ambiente ou credenciais AWS
+.env
+.aws/
+credentials.ini

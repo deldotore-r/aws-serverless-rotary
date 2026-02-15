@@ -12,13 +12,23 @@
 # Neste projeto, o estado é armazenado em um bucket S3 dedicado, com criptografia
 # habilitada.
 ###############################################################################
+###############################################################################
+# Configuração do Backend Remoto (S3)
+#
+# O arquivo de estado (.tfstate) é movido da sua máquina local para a nuvem.
+# Isso garante que a infraestrutura possa ser gerenciada de forma segura e 
+# evita perda de dados caso seu notebook tenha problemas.
+###############################################################################
 
 terraform {
   backend "s3" {
+    # Perfil da AWS CLI configurado localmente. 
+    # CRÍTICO: Garante que o Terraform use as credenciais 'rotary' para acessar o bucket.
+    profile = "rotary"
 
     # Bucket S3 previamente criado exclusivamente para armazenar o estado
     # do Terraform. Este bucket NÃO armazena dados da aplicação.
-    bucket = "rotary-infra-terraform-state"
+    bucket = "rotary-guarda-terraform-state"
 
     # Caminho (key) dentro do bucket onde o arquivo terraform.tfstate será salvo.
     # Usar um prefixo (serverless/) evita conflitos caso outros projetos utilizem
@@ -30,16 +40,14 @@ terraform {
     region = "us-east-1"
 
     # Habilita criptografia do estado em repouso no S3.
-    # Recomendado mesmo para projetos pequenos.
+    # Recomendado para proteção de dados sensíveis contidos no estado.
     encrypt = true
 
     # Observação sobre locking:
-    # Versões modernas do Terraform suportam locking nativo no backend S3
-    # através de operações condicionais.
+    # Para este projeto (uso individual), o mecanismo de consistência forte 
+    # do S3 em us-east-1 é suficiente para evitar corrupção do estado.
     #
-    # Para este projeto (uso individual, sem CI/CD), esse mecanismo é suficiente.
-    # Em cenários com múltiplos operadores ou pipelines paralelos, recomenda-se
-    # complementar com DynamoDB para locking explícito.
+    # Se o projeto crescer para uma equipe, recomenda-se adicionar:
+    # dynamodb_table = "terraform-state-lock-table"
   }
 }
-

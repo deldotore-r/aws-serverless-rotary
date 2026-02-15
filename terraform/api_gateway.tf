@@ -11,24 +11,6 @@
 ###############################################################################
 
 ##############################
-# Variáveis recomendadas
-# - CORS_ORIGINS: Domínios permitidos para requisições do browser
-# - ENVIRONMENT: "dev", "staging", "prod"
-##############################
-
-variable "cors_origins" {
-  description = "Domínios permitidos para requisições cross-origin"
-  type        = list(string)
-  default     = ["*"] # Para testes; em produção, substitua pelo domínio do site
-}
-
-variable "environment" {
-  description = "Ambiente do deploy"
-  type        = string
-  default     = "prod"
-}
-
-##############################
 # 1. Criação da API HTTP
 ##############################
 
@@ -37,9 +19,10 @@ resource "aws_apigatewayv2_api" "form_api" {
   protocol_type = "HTTP"
 
   cors_configuration {
-    allow_origins = var.cors_origins
+    allow_headers = ["content-type", "x-amz-date", "authorization", "x-api-key"]
     allow_methods = ["POST", "OPTIONS"]
-    allow_headers = ["content-type"]
+    allow_origins = ["*"]
+    max_age       = 300
   }
 
   # Tags unificadas
@@ -74,17 +57,28 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
   api_id           = aws_apigatewayv2_api.form_api.id
   integration_type = "AWS_PROXY"
   integration_uri  = aws_lambda_function.form_processor.invoke_arn
+  
+  # Força o formato 1.0 para garantir que os headers da Lambda sejam lidos corretamente
+  payload_format_version = "1.0" 
 }
 
 ##############################
-# 4. Rota POST /contato
+# 4. Rotas (POST e OPTIONS)
 ##############################
 
+# Rota principal para o envio do formulário
 resource "aws_apigatewayv2_route" "post_route" {
   api_id    = aws_apigatewayv2_api.form_api.id
   route_key = "POST /contato"
   target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
 }
+
+# Rota explícita para o Preflight do navegador (CORS)
+resource "aws_apigatewayv2_route" "options_route" {
+  api_id    = aws_apigatewayv2_api.form_api.id
+  route_key = "OPTIONS /contato"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+} 
 
 ##############################
 # 5. Permissão Lambda
