@@ -1,17 +1,17 @@
-# 💰 Estimativa de Custos (AWS Billing)
+# 💰 Cost Estimation (AWS Billing)
 
-Este projeto foi desenhado para operar predominantemente dentro do **AWS Free Tier**. No entanto, para fins de transparência e governança, abaixo apresentamos a estimativa de custos reais para manter esta infraestrutura fora do período gratuito ou após exceder as quotas.
+This project was designed to operate predominantly within the **AWS Free Tier**. However, for the sake of transparency and governance, below we present the estimated actual costs to maintain this infrastructure outside the free period or after exceeding quotas.
 
-## Resumo Estimado (Mensal)
-| Serviço | Componente | Tipo de Custo | Valor (USD) |
+## Estimated Summary (Monthly)
+| Service | Component | Cost Type | Value (USD) |
 | :--- | :--- | :--- | :--- |
-| **Route 53** | Hosted Zone (1 domínio) | Fixo | $0.50 |
-| **CloudFront** | Transferência de Dados (ex: 5GB) | Variável | ~$0.45 |
-| **S3** | Armazenamento e Requests | Variável | ~$0.05 |
-| **Outros** | API GW, Lambda, DynamoDB, SNS | Variável | < $0.05 |
-| **TOTAL** | | **Estimado** | **~$1.05 - $2.00** |
+| **Route 53** | Hosted Zone (1 domain) | Fixed | $0.50 |
+| **CloudFront** | Data Transfer (e.g.: 5GB) | Variable | ~$0.45 |
+| **S3** | Storage and Requests | Variable | ~$0.05 |
+| **Others** | API GW, Lambda, DynamoDB, SNS | Variable | < $0.05 |
+| **TOTAL** | | **Estimated** | **~$1.05 - $2.00** |
 
-## Observações Técnicas
-1. **DNS Alias**: O uso de registros `Alias` no Route 53 para apontar para o CloudFront não gera custos de consulta DNS.
-2. **KMS**: Para manter o custo baixo, este projeto utiliza a chave gerida pela AWS (`aws/s3`) para encriptação, evitando o custo de $1.00/mês de uma chave KMS personalizada.
-3. **Certificados SSL**: O AWS Certificate Manager (ACM) oferece certificados públicos gratuitos para uso com CloudFront.
+## Technical Notes
+1. **DNS Alias**: The use of `Alias` records in Route 53 to point to CloudFront does not generate DNS query costs.
+2. **KMS**: To keep costs low, this project uses the AWS-managed key (`aws/s3`) for encryption, avoiding the $1.00/month cost of a custom KMS key.
+3. **SSL Certificates**: AWS Certificate Manager (ACM) provides free public certificates for use with CloudFront.
